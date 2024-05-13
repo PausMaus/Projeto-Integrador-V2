@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container container-perfil mt-5 d-flex justify-content-center">
+       <div class="card card-perfil  p-2 d-flex">
+           <div class="d-flex align-items-center">
+                    <div class="image pe-3"><img src="{{ url_for('static', filename='imagens/foto_perfil/{}'.format( current_user.foto_perfil)) }}" class="rounded" height="180" width="180" ></div>
+                    <div class="ml-1 w-50">
+                        <h4 class="mb-4 ">{{ current_user.username }}</h4> <span>{{ current_user.email}}</span>
+                        <div class="p-1 mt-3 bg-primary d-flex justify-content-between rounded-3 text-white stats">
+                            <div class="d-flex flex-column"><span class="alunos">Alunos</span><span class="number1 ms-3">{{current_user.contar_alunos() }}</span></div>
+                            {% if 'Não informado' in current_user.cursos %}
+                                <div class="d-flex flex-column"><span class="alunos">Alunos</span><span class="number1 ms-2">0</span></div>
+                            {% else %}
+                                <div class="d-flex flex-column"><span class="ativos">Ativos</span><span class="number2 ms-3">{{ current_user.contar_ativos() }}</span></div>
+                                <div class="d-flex flex-column"><span class="inativos">Inativos</span><span class="number3 ms-3">{{ current_user.contar_inativos() }}</span></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="container text-center pt-3 ">
+        <h1 style="color: black">Academia Físico Mania</h1>
+    </div>
+    <div class="container ">
+        <hr>
+            {% for post in post %}
+            <div class=" row  justify-content-center mt-4 p-3 ">
+                <div class="meupost col col-post col-3 rounded">
+                    <div class="image d-flex justify-content-center pt-3 p-1"><img src="{{ url_for('static', filename='imagens/foto_perfil/{}'.format( post.autor.foto_perfil)) }}" class="rounded" height="180" width="180" ></div>
+                    <strong class="d-flex justify-content-center">{{ post.autor.username }}</strong>
+
+                </div>
+                <div class=" meupost col col-8 rounded">
+                        <h3 class="pt-3">{{ post.titulo}}
+                            <small class=" m-3  text-muted" style="font-size:15px "> -Data de Criação {{ post.data_criacao.strftime('%d/%m/%Y -- %H:%M:%S') }}
+                                {% if post %}
+                                    <a class=" m-5 me-5 "style="text-decoration: none" href=" {{ url_for('editar_post',post_id=post.id) }}"> Editar Post</a>
+                                {% endif%}
+
+                            </small>
+                        </h3>
+                    <hr>
+                    <p class="pt-2">{{ post.corpo}}</p>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+
+{% endblock%}

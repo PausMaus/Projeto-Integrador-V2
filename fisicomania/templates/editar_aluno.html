@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container ">
+    <div class="row p-4 justify-content-center">
+        <div class="col-3">
+            {% for plano in aluno_ed.plano.split(';') %}
+                {% if plano  %}
+                    <div class="card card-aluno bg-success p-1 btn btn-dark">
+                        <strong>{{ aluno_ed.nome }}</strong><br>
+                        <span>{{ aluno_ed.email }}</span><br>
+                        <span>{{ aluno_ed.contato }}</span><br>
+                        <div style="text-align: center">
+                            <strong>Plano</strong><br>
+                            {% for plano in aluno_ed.plano.split(';') %}
+                                {% if plano  %}
+                                    <button type="button" class="btn btn-success mt-2" >{{ aluno_ed.plano}}</button>
+                                {% else %}
+                                    <button type="button" class="btn btn-danger mt-2">{{ aluno_ed.planoIn }}</button>
+                                {% endif %}
+
+                            {% endfor %}
+                        </div>
+                        <div class="  me-1 m-1 d-grid-5   ">
+                            {% if form6 %}
+                                <div class="button mt-2 ">
+                                    <a>
+                                        <button class="btn btn-sm btn-danger w-50" data-bs-toggle="modal" data-bs-target="#ExcluirAluno" >Excluir Aluno</button>
+                                    </a>
+                                </div>
+                            {% endif%}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="card card-aluno bg-danger p-1 btn btn-dark">
+                        <strong>{{ aluno_ed.nome }}</strong><br>
+                        <span>{{ aluno_ed.email }}</span><br>
+                        <span>{{ aluno_ed.contato }}</span><br>
+                        <div style="text-align: center">
+                            <strong>Plano</strong><br>
+                            {% for plano in aluno_ed.plano.split(';') %}
+                                {% if plano  %}
+                                    <button type="button" class="btn btn-success mt-2" >{{ aluno_ed.plano}}</button>
+                                {% else %}
+                                    <button type="button" class="btn btn-danger mt-2">{{ aluno_ed.planoIn }}</button>
+                                {% endif %}
+
+                            {% endfor %}
+                        </div>
+                        <div class="  me-1 m-1 d-grid-5   ">
+                            {% if form6 %}
+                                <div class="button mt-2 ">
+                                    <a>
+                                        <button class="btn btn-sm btn-danger w-50" data-bs-toggle="modal" data-bs-target="#ExcluirAluno" >Excluir Aluno</button>
+                                    </a>
+                                </div>
+                            {% endif%}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% if form6 %}
+<div class="container ">
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-6 ">
+                <form method="POST" action="" class="border m-5 p-4 bg-success-subtle rounded-4">
+                    {{form6.csrf_token}}
+                    <legend>Editar Aluno </legend>
+                    <fieldset >
+                        <div class="form-group  mt-2  ">
+                            {{ form6.nome.label(class="form-control-label")}}
+
+                            {% if form6.nome.errors %}
+                                {{ form6.nome(class="form-control is is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for erro in form6.nome.errors %}
+                                    {{erro}}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form6.nome(class="form-control")}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group ">
+                            {{ form6.email.label(class="form-control-label")}}
+
+                            {% if form6.email.errors %}
+                                {{ form6.email(class="form-control is is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for erro in form6.email.errors %}
+                                    {{erro}}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form6.email(class="form-control")}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group ">
+                            {{ form6.contato.label(class="form-control-label")}}
+
+                            {% if form6.contato.errors %}
+                                {{ form6.contato(class="form-control is is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for erro in form6.contato.errors %}
+                                    {{erro}}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form6.contato(class="form-control")}}
+                            {% endif %}
+                        </div>
+                        <hr>
+
+                        {% for campo in form6 %}
+                            {% if 'plano_' in campo.name %}
+                                <div class="form-group">
+                                    {{ campo(class="form-check-input") }}
+                                    {{ campo.label(class="form-check-label") }}
+
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {% for campo in form6 %}
+                            {% if 'planos_' in campo.name %}
+                                <div class="form-group">
+                                    {{ campo(class="form-check-input") }}
+                                    {{ campo.label(class="form-check-label") }}
+
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </fieldset>
+                    {{form6.botao_submit1(class="btn btn-success mt-3")}}
+                </form>
+            </div>
+        </div>
+</div>
+
+{% endif %}
+<!-- Modal pop-up para confirmar exclusao do post -->
+<div class="modal fade" id="ExcluirAluno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Excluir Aluno</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cancelar"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que quer excluir o Aluno?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <form method="Post" action="{{ url_for('excluir_aluno', aluno_id=aluno_ed.id) }}">
+            <button type="submit" class="btn btn-danger">Excluir</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{%extends 'home.html'%}
+
+
+
+{% block body %}
+
+
+
+<div>
+  <div class="row justify-content-center mb-3">
+      <div class="col-md-2">
+        <table>
+          <tbody>
+            <tr>
+              <th scope="row" colspan="4">Total Alunos</th>
+              <td>{{total_alunos}}</td>
+              <td>Renda Possível</td>
+              <td>{{total_alunos*100}}</td>
+            </tr>
+            <tr>
+              <th scope="row" colspan="4">Total Ativos</th>
+              <td>{{Ativo}}</td>
+              <td>Renda  Líquida</td>
+              <td>{{Ativo*100}}</td>
+            </tr>
+            <tr>
+              <th scope="row" colspan="4">Total Inativos</th>
+              <td>{{Inativo}}</td>
+              <td>Renda Perdida</td>
+              <td>{{Inativo*100}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+
+
+
+
+<div class="row justify-content-center">
+  <div class="col-md-2">
+    <table>
+        <thead>
+          <tr>
+            <th scope="col">Aluno</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for aluno in lista_alunos %}
+            <tr>
+              <th scope="row">{{aluno.nome}}</th>
+              <td>{{aluno.email}}</td>
+              <td>{{aluno.contato}}</td>
+              {% for plano in aluno.plano.split(';') %}
+                {% if plano  %}
+                    <td style="background-color: green">{{ aluno.plano}}</td>
+                {% else %}
+                    <td style="background-color: red">{{ aluno.planoIn }}</td>
+
+                {% endif %}
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+  
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'alunos.html' %}
+
+{% block body %}
+<div class="container ">
+        <hr>
+        <div class="row justify-content-center">
+            <div class="col-6 ">
+                <form method="POST" action="" class="border m-5 p-4 bg-success-subtle rounded-4">
+                    {{form3.csrf_token}}
+                    <legend>Editar Aluno </legend>
+                    <fieldset >
+                        <div class="form-group  mt-2  ">
+                            {{ form3.nome.label(class="form-control-label")}}
+
+                            {% if form3.nome.errors %}
+                                {{ form3.nome(class="form-control is is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for erro in form3.nome.errors %}
+                                    {{erro}}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form3.nome(class="form-control")}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group ">
+                            {{ form3.email.label(class="form-control-label")}}
+
+                            {% if form3.email.errors %}
+                                {{ form3.email(class="form-control is is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for erro in form3.email.errors %}
+                                    {{erro}}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form3.email(class="form-control")}}
+                            {% endif %}
+                        </div>
+                        <div class="form-group ">
+                            {{ form3.contato.label(class="form-control-label")}}
+
+                            {% if form3.contato.errors %}
+                                {{ form3.contato(class="form-control is is-invalid")}}
+                            <div class="invalid-feedback">
+                                {% for erro in form3.contato.errors %}
+                                    {{erro}}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form3.contato(class="form-control")}}
+                            {% endif %}
+                        </div>
+
+                        <hr>
+
+                        {% for campo in form %}
+                            {% if 'aluno_' in campo.name %}
+                                <div class="form-group">
+                                    {{ campo.label(class="form-check-label") }}
+                                    {{ campo(class="form-check-input") }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </fieldset>
+                    {{form3.botao_submit(class="btn btn-success mt-3")}}
+                </form>
+            </div>
+        </div>
+</div>
+
+
+
+
+{% endblock %}

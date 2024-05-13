@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="mt-3">
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-2">
+                <a href="{{ url_for('criar_aluno') }}">
+                    <button class="btn btn-sm btn-dark w-100">Criar Aluno</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="row p-4 justify-content-center">
+            {% for aluno in lista_alunos %}
+                    <div class="col-md-2 mb-2">
+                        {% for plano in aluno.plano.split(';') %}
+                            {% if plano  %}
+                                <div class="card card-aluno bg-success p-1 btn btn-dark">
+                                    <strong class=" me-3 row justify-content-end text-muted" style="font-size:15px ">Personal Trainer: {{ aluno.autor.username }}</strong><br>
+                                    <strong>{{ aluno.nome }}</strong><br>
+                                    <span>{{ aluno.email }}</span><br>
+                                    <span>{{ aluno.contato }}</span>
+                                    <span>{{ aluno.mensalidade }}</span>
+                                    <div class="row justify-content-center">
+                                        <div class="col col-4 mt-4" style="text-align: center">
+                                        <strong >Plano</strong><br>
+                                            {% for plano in aluno.plano.split(';') %}
+                                                {% if plano  %}
+                                                    <strong class="row mt-2">{{ aluno.plano }}</strong>
+
+                                                {% else %}
+                                                    <strong class="row mt-2">{{ aluno.planoIn }}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="button mt-3">
+                                            <a class="w-50 m-2" href="{{ url_for('editar_aluno', aluno_id=aluno.id) }}">
+                                                <button class="btn btn-sm btn-dark w-20">Editar Aluno</button>
+                                            </a>
+
+                                        </div>
+
+                                    </div><hr>
+                                </div>
+                            {% else %}
+                                <div class="card card-aluno bg-danger p-1 btn btn-dark">
+                                    <strong class=" me-3 row justify-content-end text-muted" style="font-size:15px ">Personal Trainer: {{ aluno.autor.username }}</strong><br>
+                                    <strong>{{ aluno.nome }}</strong><br>
+                                    <span>{{ aluno.email }}</span><br>
+                                    <span>{{ aluno.contato }}</span>
+                                    <span>{{ aluno.mensalidade }}</span>
+                                    <div class="row justify-content-center">
+                                        <div class="col col-4 mt-4" style="text-align: center">
+                                        <strong>Plano</strong><br>
+                                            {% for plano in aluno.plano.split(';') %}
+                                                {% if plano  %}
+                                                    <strong class="row mt-2">{{ aluno.alunos }}</strong>
+                                                {% else %}
+                                                    <strong class="row mt-2">{{ aluno.planoIn }}</strong>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <div class="button mt-3">
+                                            <a class="w-50 m-2" href="{{ url_for('editar_aluno', aluno_id=aluno.id) }}">
+                                                <button class="btn btn-sm btn-dark w-20">Editar Aluno</button>
+                                            </a>
+
+                                        </div>
+
+                                    </div><hr>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,113 @@
+
+body{
+    background-image: url(imagens/fundo.jpg);
+    background-repeat:no-repeat;
+    background-size: cover;
+    }
+
+.card{
+    width: 400px;
+    border: none;
+    border-radius: 10px;
+    background-color: #009966;
+    }
+
+.stats{
+    background: #f2f5f8 !important;
+    color: #000 !important;
+    }
+.alunos{
+    font-size:12px;
+    color: #0000ff;
+    }
+
+.number1{
+    font-weight:600;
+    }
+
+.ativos{
+    font-size:12px;
+    font-weight:700;
+    color: #00ff00;
+    }
+
+.number2{
+    font-weight:600;
+    }
+
+.inativos{
+    font-size:12px;
+    color: #cc0000;
+    }
+
+.number3{
+    font-weight:600;
+    }
+
+.meupost{
+    background: #90EE90;
+    }
+
+.col-post{
+    width: 200px
+    }
+
+
+.card-aluno{
+    width: 300px
+    }
+
+.card-perfil{
+    width: 420px
+
+    }
+.image-perfil{
+    max-heigth:300px
+
+    }
+.container-perfil{
+    width: auto
+
+    }
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+caption {
+  caption-side: bottom;
+  padding: 10px;
+  font-weight: bold;
+}
+
+thead,
+tfoot {
+  background-color: rgb(228 240 245);
+}
+
+th,
+td {
+  border: 1px solid rgb(231, 255, 122);
+  padding: 8px 10px;
+}
+
+td:last-of-type {
+  text-align: center;
+}
+
+tbody  {
+  background-color: rgb(180, 180, 180);
+}
+
+tfoot th {
+  text-align: right;
+}
+
+tfoot td {
+  font-weight: bold;
+}
+
